@@ -74,7 +74,7 @@ class CustomOptionsView(tk.Frame):
         # button3.pack()
 
         self.load_options()
-        save.pack(anchor="ne", padx=16, pady=16)
+        save.pack(side=tk.BOTTOM, anchor="se", padx=16, pady=16)
         return self
 
     def add_option(self, ods: OptionDataState = None):

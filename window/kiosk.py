@@ -8,6 +8,7 @@ import obj
 
 debug_windows = True
 
+
 class Window:
     def __init__(self, root, main_note: ttk.Notebook):
         self.root = root
@@ -26,11 +27,10 @@ class Window:
         Label(app_frame, text='Приложения').pack(side=LEFT, padx=16)
 
         frame_with_btn = ttk.Frame(app_frame)
+        ttk.Combobox(frame_with_btn, state="readonly", width=25).pack(side=RIGHT, padx=5)
 
-        self.app_name = ttk.Combobox(frame_with_btn, state="readonly", width=25)
-        self.app_name.pack(side=LEFT, padx=5)
-
-        Button(frame_with_btn, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT)
+        frame_with_btn2 = ttk.Frame(app_frame)
+        Button(frame_with_btn2, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT)
 
         user_frame = ttk.Frame(frame)
         Label(user_frame, text='Пользователь').pack(side=LEFT, padx=16)
@@ -38,8 +38,9 @@ class Window:
         self.username = ttk.Combobox(user_frame, values=self.get_users(), width=22)
         self.username.pack(side=RIGHT, padx=5)
 
-        app_frame.pack(fill=BOTH, pady=16)
+        app_frame.pack(fill=BOTH, pady=(16,4))
         frame_with_btn.pack(fill=BOTH)
+        frame_with_btn2.pack(fill=BOTH, pady=(4, 0), padx=8)
         user_frame.pack(fill=BOTH)
 
         for i in self.command_params:

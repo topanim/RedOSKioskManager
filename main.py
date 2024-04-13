@@ -1,13 +1,8 @@
-import dataclasses
-import os
-import subprocess
-import tkinter
 from tkinter import *
 from tkinter import ttk
 
-import window.kiosk
 import window.custom_options.components.CustomOptionsView
-import obj
+import window.kiosk
 
 
 class App:

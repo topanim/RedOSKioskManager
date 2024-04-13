@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import ttk
 from typing import Callable
@@ -41,4 +40,4 @@ class Option(tk.Frame):
         option_type.pack(side=tk.LEFT)
 
         button = tk.Button(self, text="Удалить", command=self.__on_destroy)
-        button.pack()
+        button.pack(pady=(8, 0))
