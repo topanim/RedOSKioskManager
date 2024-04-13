@@ -5,6 +5,7 @@ import setting
 import window.custom_options.components.CustomOptionsView
 import window.kiosk
 
+
 class App:
     def __init__(self):
         root = Tk()
@@ -21,7 +22,7 @@ class App:
 
     def start(self):
         self.make_window('Киоск', window.kiosk.Window(self.root, self.notebook).create_kiosk())
-        self.make_window('Конфигурирование', window.custom_options.components.CustomOptionsView.CustomOptionsView().init())
+        self.make_window('Конфигурирование', window.custom_options.components.OptionsScreen.OptionsScreen().init())
 
         self.root.mainloop()
 

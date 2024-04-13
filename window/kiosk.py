@@ -5,9 +5,9 @@ import subprocess
 import tkinter
 from tkinter import *
 from tkinter import ttk
-
 import obj
-import tkinter.filedialog
+from window.custom_options.components.OptionsHintDialog import OptionsHintDialog
+from window.custom_options.models.OptionDataState import OptionData
 
 import setting
 
@@ -19,9 +19,16 @@ class Window:
 
         with open('window/custom_options/config/config.json') as f:
             params = json.loads(f.read())
-            for i in params:
-                self.command_params.append(obj.ParamsCommand(i['flag'], i['desc'], Entry if i['type'] == 'entry' else Checkbutton))
-
+            for param in params:
+                option = OptionData(**param)
+                self.command_params.append(
+                    obj.ParamsCommand(
+                        option.flag,
+                        option.name,
+                        option.desc,
+                        Entry if option.type == 'entry' else Checkbutton
+                    )
+                )
 
         self.root = root
         self.notebook = main_note
@@ -54,14 +61,14 @@ class Window:
         self.username = ttk.Combobox(user_frame, values=self.get_users(), width=22)
         self.username.pack(side=RIGHT, padx=5)
 
-        app_frame.pack(fill=BOTH, pady=(16,4))
+        app_frame.pack(fill=BOTH, pady=(16, 4))
         frame_with_btn.pack(fill=BOTH)
         frame_with_btn2.pack(fill=BOTH, pady=(4, 0), padx=8)
         user_frame.pack(fill=BOTH)
 
-        for i in self.command_params:
-            var = self.make_frame(i.name, i.typeEnter, frame)
-            i.values = var
+        for param_command in self.command_params:
+            var = self.make_frame(param_command, frame)
+            param_command.values = var
 
         Button(frame, text='Содзать киоск', command=self.command_kiosk_on).pack(pady=(16, 3))
         Button(frame, text='Отключить киоск', command=self.command_kiosk_off).pack(pady=3)
@@ -69,14 +76,18 @@ class Window:
 
         return frame
 
-    def make_frame(self, label_text: str, entry_type, main_frame: Frame):
+    def make_frame(self, param: obj.ParamsCommand, main_frame: Frame):
         frame_down_level = ttk.Frame(main_frame, width=5)
-        Label(frame_down_level, text=label_text).pack(side=LEFT, padx=16)
-        input_entry = entry_type(frame_down_level, width=23)
+        Label(frame_down_level, text=param.name).pack(side=LEFT, padx=16)
+        input_entry = param.typeEnter(frame_down_level, width=23)
         var = input_entry
-        if entry_type == Checkbutton:
+        if param.typeEnter == Checkbutton:
             var = IntVar()
-            input_entry = entry_type(frame_down_level, variable=var, onvalue=1, offvalue=0)
+            input_entry = param.typeEnter(frame_down_level, variable=var, onvalue=1, offvalue=0)
+
+        hint = tkinter.Button(frame_down_level, text="?",
+                              command=lambda: OptionsHintDialog(param, main_frame).init())
+        hint.pack(side=RIGHT)
         input_entry.pack(side=RIGHT, padx=8)
         frame_down_level.pack(fill=BOTH)
         return var
