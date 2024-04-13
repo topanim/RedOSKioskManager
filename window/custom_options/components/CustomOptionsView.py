@@ -59,11 +59,10 @@ class CustomOptionsView(tk.Frame):
 
     def init(self):
         self.pack()
-        add_option = tk.Button(self, text="add option", command=self.add_option)
-        add_option.pack()
+        add_option = tk.Button(self, text="Добавить свойство", command=self.add_option)
+        add_option.pack(pady=16)
 
-        save = tk.Button(self, text="save", command=self.save_options)
-
+        save = tk.Button(self, text="Сохранить", command=self.save_options)
 
         # TODO: DEBUG Option
         # button2 = tk.Button(self, text="print options", command=lambda: print(self.get_options()))
@@ -74,7 +73,7 @@ class CustomOptionsView(tk.Frame):
         # button3.pack()
 
         self.load_options()
-        save.pack(side=tk.BOTTOM)
+        save.pack(anchor="ne", padx=16, pady=16)
         return self
 
     def add_option(self, ods: OptionDataState = None):

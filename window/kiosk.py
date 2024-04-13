@@ -38,7 +38,7 @@ class Window:
         self.username = ttk.Combobox(user_frame, values=self.get_users(), width=22)
         self.username.pack(side=RIGHT, padx=5)
 
-        app_frame.pack(fill=BOTH)
+        app_frame.pack(fill=BOTH, pady=16)
         frame_with_btn.pack(fill=BOTH)
         user_frame.pack(fill=BOTH)
 

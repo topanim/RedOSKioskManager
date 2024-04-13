@@ -15,6 +15,7 @@ class Option(tk.Frame):
             ods: OptionDataState = None
     ):
         super().__init__(master)
+
         self.master_on_destroy = on_destroy
         if ods is None:
             self.__option_state = OptionDataState()
@@ -29,7 +30,7 @@ class Option(tk.Frame):
         self.destroy()
 
     def init(self):
-        self.pack()
+        self.pack(padx=16)
         flag = tk.Entry(self, textvariable=self.__option_state.flag)
         flag.pack(side=tk.LEFT)
 
@@ -39,5 +40,5 @@ class Option(tk.Frame):
         option_type = ttk.Combobox(self, textvariable=self.__option_state.type, values=Types.list())
         option_type.pack(side=tk.LEFT)
 
-        button = tk.Button(self, text="::", command=self.__on_destroy)
+        button = tk.Button(self, text="Удалить", command=self.__on_destroy)
         button.pack()
