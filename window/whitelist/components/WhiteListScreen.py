@@ -17,12 +17,18 @@ class WhiteListScreen(ttk.Frame):
         with open('../config/whitelist.json', 'w', encoding='utf-8') as f:
             f.write(dumps(self.table.get_domains(), ensure_ascii=False))
 
-    def load_domains(self):
+    @staticmethod
+    def get_saved():
         with open('../config/whitelist.json', 'r', encoding='utf-8') as f:
             try:
                 domains = [str(obj) for obj in loads(f.read())]
             except:
                 domains = []
+
+        return domains
+
+    def load_domains(self):
+        domains = self.get_saved()
 
         self.clear_domains()
         for domain in domains:
@@ -55,6 +61,6 @@ class WhiteListScreen(ttk.Frame):
         save.pack()
 
 
-root = tk.Tk()
-WhiteListScreen(root).init()
-root.mainloop()
+# root = tk.Tk()
+# WhiteListScreen(root).init()
+# root.mainloop()
