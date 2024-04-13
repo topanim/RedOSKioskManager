@@ -16,7 +16,7 @@ class Window:
 
         self.command_params = []
 
-        with open('window/custom_options/config/config.json', 'r') as f:
+        with open('window/custom_options/config/config.json', 'r', encoding='utf-8') as f:
             params = json.loads(f.read())
             for param in params:
                 option = OptionData(**param)

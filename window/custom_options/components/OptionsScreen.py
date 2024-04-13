@@ -20,11 +20,11 @@ class OptionsScreen(tk.Frame):
         self.options.remove(option)
 
     def save_options(self):
-        with open('window/custom_options/config/config.json', 'w') as f:
+        with open('window/custom_options/config/config.json', 'w', encoding='utf-8') as f:
             f.write(dumps([asdict(obj) for obj in self.get_options()], ensure_ascii=False))
 
     def load_options(self):
-        with open('window/custom_options/config/config.json', 'r') as f:
+        with open('window/custom_options/config/config.json', 'r', encoding='utf-8') as f:
             try:
                 options = [OptionData(**obj) for obj in loads(f.read())]
             except:
