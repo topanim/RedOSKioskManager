@@ -1,4 +1,5 @@
 import dataclasses
+import json
 import os
 import subprocess
 import tkinter
@@ -11,12 +12,17 @@ debug_windows = True
 
 class Window:
     def __init__(self, root, main_note: ttk.Notebook):
+
+        self.command_params = []
+
+        with open('window/custom_options/config/config.json') as f:
+            params = json.loads(f.read())
+            for i in params:
+                self.command_params.append(obj.ParamsCommand(i['flag'], i['desc'], Entry if i['type'] == 'entry' else Checkbutton))
+
+
         self.root = root
         self.notebook = main_note
-        self.command_params = [obj.ParamsCommand('--timelock', 'Время до блокировки', Entry),
-                               obj.ParamsCommand('--blockbtn', 'Отображение кнопки блокирования экрана', Checkbutton),
-                               obj.ParamsCommand('--autohide', 'Автоматического скрытия главной панели', Checkbutton),
-                               obj.ParamsCommand('--quiet', 'Подавление вывода на экран', Checkbutton)]
 
     def create_kiosk(self) -> tkinter.Frame:
         frame = ttk.Frame(self.notebook)
@@ -27,7 +33,9 @@ class Window:
         Label(app_frame, text='Приложения').pack(side=LEFT, padx=16)
 
         frame_with_btn = ttk.Frame(app_frame)
-        ttk.Combobox(frame_with_btn, state="readonly", width=25).pack(side=RIGHT, padx=5)
+        self.app_name = ttk.Combobox(frame_with_btn, state="readonly", width=25)
+        self.app_name.pack(side=RIGHT, padx=5)
+
 
         frame_with_btn2 = ttk.Frame(app_frame)
         Button(frame_with_btn2, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT)

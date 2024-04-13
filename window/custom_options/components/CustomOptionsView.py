@@ -11,13 +11,13 @@ from window.custom_options.models.OptionDataState import OptionDataState, Option
 class CustomOptionsView(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
-        self.__options = []
+        self.options = []
 
     def get_options(self):
-        return [o for option in self.__options if (o := option.get()).is_valid()]
+        return list(map(lambda x: x.get(), self.options))
 
     def on_option_delete(self, option):
-        self.__options.remove(option)
+        self.options.remove(option)
 
     def save_options(self):
         with open('window/custom_options/config/config.json', 'w') as f:
@@ -55,7 +55,7 @@ class CustomOptionsView(tk.Frame):
     #         self.add_option(OptionDataState.from_option_data(option))
 
     def clear_options(self):
-        for option in self.__options:
+        for option in self.options:
             option.destroy()
 
     def init(self):
@@ -79,5 +79,5 @@ class CustomOptionsView(tk.Frame):
 
     def add_option(self, ods: OptionDataState = None):
         option = Option(self, self.on_option_delete, ods)
-        self.__options.append(option)
+        self.options.append(option)
         option.init()
