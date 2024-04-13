@@ -63,7 +63,6 @@ class CustomOptionsView(tk.Frame):
         add_option.pack()
 
         save = tk.Button(self, text="save", command=self.save_options)
-        return self
 
 
         # TODO: DEBUG Option
@@ -76,14 +75,9 @@ class CustomOptionsView(tk.Frame):
 
         self.load_options()
         save.pack(side=tk.BOTTOM)
-
+        return self
 
     def add_option(self, ods: OptionDataState = None):
         option = Option(self, self.on_option_delete, ods)
         self.__options.append(option)
         option.init()
-
-
-root = tk.Tk()
-CustomOptionsView(root).init()
-root.mainloop()
