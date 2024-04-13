@@ -13,7 +13,7 @@ class OptionsScreen(tk.Frame):
         self.options = []
 
     def get_options(self):
-        return list(map(lambda x: x.get(), self.options))
+        return list(filter(lambda it: it.is_valid(), map(lambda x: x.get(), self.options)))
 
     def on_option_delete(self, option):
         self.options.remove(option)

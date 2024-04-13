@@ -1,7 +1,6 @@
 import tkinter as tk
 
 from obj import ParamsCommand
-from res.strings import options_hint
 
 
 class OptionsHintDialog(tk.Toplevel):

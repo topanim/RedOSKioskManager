@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 import tkinter as tk
 
 from window.custom_options.static.types import Types
-from window.custom_options.utils.is_not_empty import is_not_empty
+from utils.is_not_empty import is_not_empty
 
 
 @dataclass

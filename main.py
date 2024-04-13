@@ -1,9 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 
-import setting
 import window.custom_options.components.OptionsScreen
 import window.kiosk
+from window.whitelist.components.WhiteListScreen import WhiteListScreen
 
 
 class App:
@@ -18,7 +18,6 @@ class App:
 
         self.root.event_add('<<Paste>>', '<Control-igrave>')
         self.root.event_add("<<Copy>>", "<Control-ntilde>")
-
 
     def make_window(self, win_name: str, frame: Frame) -> ttk.Frame:
         self.notebook.add(frame, text=win_name)
