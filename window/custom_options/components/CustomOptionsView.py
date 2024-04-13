@@ -1,4 +1,5 @@
 import tkinter as tk
+from dataclasses import asdict
 from typing import List
 
 from json import loads, dumps
@@ -20,12 +21,12 @@ class CustomOptionsView(tk.Frame):
 
     def save_options(self):
         with open('window/custom_options/config/config.json', 'w') as f:
-            f.write(dumps(self.get_options()))
+            f.write(dumps([asdict(obj) for obj in self.get_options()]))
 
     def load_options(self):
         with open('window/custom_options/config/config.json', 'r') as f:
             try:
-                options = loads(f.read(), List[OptionData])
+                options = [OptionData(**obj) for obj in loads(f.read())]
             except:
                 options = []
 
