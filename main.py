@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 
-import window.custom_options.components.CustomOptionsView
+import window.custom_options.components.OptionsScreen
 import window.kiosk
 
 
@@ -21,7 +21,7 @@ class App:
 
     def start(self):
         self.make_window('Киоск', window.kiosk.Window(self.root, self.notebook).create_kiosk())
-        self.make_window('Конфигурирование', window.custom_options.components.CustomOptionsView.CustomOptionsView().init())
+        self.make_window('Конфигурирование', window.custom_options.components.OptionsScreen.OptionsScreen().init())
 
         self.root.mainloop()
 

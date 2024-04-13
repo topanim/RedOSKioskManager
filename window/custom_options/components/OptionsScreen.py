@@ -1,20 +1,20 @@
 import tkinter as tk
 from dataclasses import asdict
-from typing import List
 
 from json import loads, dumps
 
-from window.custom_options.components.Option import Option
+from window.custom_options.components.OptionsHintDialog import OptionsHintDialog
+from window.custom_options.components.OptionComponent import Option
 from window.custom_options.models.OptionDataState import OptionDataState, OptionData
 
 
-class CustomOptionsView(tk.Frame):
+class OptionsScreen(tk.Frame):
     def __init__(self, master=None):
-        super().__init__(master)
+        super().__init__(master, pady=16)
         self.options = []
 
     def get_options(self):
-        return list(map(lambda x: x.get(), self.options))
+        return [option.get() for option in self.options if option.get().is_valid()]
 
     def on_option_delete(self, option):
         self.options.remove(option)
@@ -61,7 +61,10 @@ class CustomOptionsView(tk.Frame):
     def init(self):
         self.pack()
         add_option = tk.Button(self, text="Добавить свойство", command=self.add_option)
-        add_option.pack(pady=16)
+        add_option.pack()
+
+        hint = tk.Button(self, text="?", command=lambda: OptionsHintDialog(self).init())
+        hint.pack(anchor="ne")
 
         save = tk.Button(self, text="Сохранить", command=self.save_options)
 
