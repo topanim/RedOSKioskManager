@@ -10,15 +10,12 @@ import obj
 
 class App:
     def __init__(self):
-
-
         root = Tk()
         root.title("Эксперт киоска")
-        root.geometry("500x250")
+        root.geometry("500x300")
         self.root = root
         self.notebook = ttk.Notebook()
         self.notebook.pack(expand=True, fill=BOTH)
-
 
 
     def make_window(self, win_name: str, frame: Frame) -> ttk.Frame:

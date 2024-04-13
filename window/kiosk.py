@@ -48,6 +48,7 @@ class Window:
 
         Button(frame, text='Содзать киоск', command=self.command_kiosk_on).pack()
         Button(frame, text='Отключить киоск', command=self.command_kiosk_off).pack()
+        Button(frame, text='Создать файл конфигурирования', command=self.create_import_params).pack()
 
         return frame
 
@@ -131,4 +132,31 @@ class Window:
         self.notebook.add(frame, text=win_name)
         return frame
 
+    def create_import_params(self):
+        windows = Toplevel(self.root)
+        is_create_user = self.make_frame('Создавать пользователя?', Checkbutton, windows)
+        is_use_keys = self.make_frame('Использовать ключи?', Checkbutton, windows)
+        btn_create = Button(windows, text="Создать")
+        btn_create.pack()
 
+        def create_config():
+            cmd_parm = []
+            sh_cmd = []
+            if is_create_user.get() == 1:
+                sh_cmd.append(f"useradd {self.username.get()}")
+
+            if len(self.app_name.get()) > 0:
+                cmd = f'-a {self.app_name.get()}'
+                cmd_parm.append(cmd)
+
+            if len(self.username.get()) > 0:
+                cmd = f'-u {self.username.get()}'
+                cmd_parm.append(cmd)
+
+            if is_use_keys.get() == 1:
+                for i in self.command_params:
+                    if i.typeEnter == Checkbutton and i.values.get() == 1:
+                        cmd_parm.append(i.prefix)
+                    if i.typeEnter != Checkbutton and (str(i.values.get()) != "0" and len(str(i.values.get())) != 0):
+                        cmd_parm.append(f"{i.prefix} {i.values.get()}")
+            sh_cmd.append(f"sudo kiosk-mode-on {' '.join(cmd_parm)}")
