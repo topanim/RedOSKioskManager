@@ -36,6 +36,12 @@ class Window:
 
     def create_kiosk(self) -> tkinter.Frame:
 
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure("TCombobox", fieldbackground="white", background="white")
+        style.configure('TButton', foreground='black', background=setting.BG_COLOR)
+        style.configure('TEntry', foreground='black', background=setting.BG_COLOR)
+
         frame = tkinter.Frame(self.notebook)
         frame.config(bg=setting.BG_COLOR)
         frame.pack(fill=BOTH, expand=True)
@@ -43,25 +49,24 @@ class Window:
         app_frame = tkinter.Frame(frame)
         app_frame.config(bg=setting.BG_COLOR)
 
-        Label(app_frame, text='Приложения').pack(side=LEFT, padx=16)
+        Label(app_frame, text='Приложения', bg=setting.BG_COLOR).pack(side=LEFT, padx=16)
 
         frame_with_btn = tkinter.Frame(app_frame)
         frame_with_btn.config(bg=setting.BG_COLOR)
 
-        self.app_name = ttk.Combobox(frame_with_btn, state="readonly", width=24)
+        self.app_name = ttk.Combobox(frame_with_btn, width=24)
         self.app_name.pack(side=RIGHT, padx=16)
-
 
         frame_with_btn2 = tkinter.Frame(app_frame)
         frame_with_btn2.config(bg=setting.BG_COLOR)
 
-        Button(frame_with_btn2, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT,
-                                                                                                            padx=8)
+        ttk.Button(frame_with_btn2, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(
+            side=RIGHT, padx=8)
 
         user_frame = tkinter.Frame(frame)
         user_frame.config(bg=setting.BG_COLOR)
 
-        Label(user_frame, text='Пользователь').pack(side=LEFT, padx=16)
+        Label(user_frame, text='Пользователь', bg=setting.BG_COLOR).pack(side=LEFT, padx=16)
 
         self.username = ttk.Combobox(user_frame, values=self.get_users(), width=24)
         self.username.pack(side=RIGHT, padx=16, pady=(8, 16))
@@ -75,9 +80,9 @@ class Window:
             var = self.make_frame(param_command, frame)
             param_command.values = var
 
-        Button(frame, text='Содзать киоск', command=self.command_kiosk_on).pack(pady=(16, 3))
-        Button(frame, text='Отключить киоск', command=self.command_kiosk_off).pack(pady=3)
-        Button(frame, text='Создать файл конфигурирования', command=self.create_import_params).pack(pady=3)
+        ttk.Button(frame, text='Содзать киоск', command=self.command_kiosk_on).pack(pady=(16, 3))
+        ttk.Button(frame, text='Отключить киоск', command=self.command_kiosk_off).pack(pady=3)
+        ttk.Button(frame, text='Создать файл конфигурирования', command=self.create_import_params).pack(pady=3)
 
         return frame
 
@@ -85,14 +90,14 @@ class Window:
         frame_down_level = tkinter.Frame(main_frame, width=5)
         frame_down_level.config(bg=setting.BG_COLOR)
 
-        Label(frame_down_level, text=param.name).pack(side=LEFT, padx=16)
-        input_entry = param.typeEnter(frame_down_level, width=23, )
+        Label(frame_down_level, text=param.name, bg=setting.BG_COLOR).pack(side=LEFT, padx=16)
+        input_entry = ttk.Entry(frame_down_level, style="TEntry", width=20)
         var = input_entry
         if param.typeEnter == Checkbutton:
             var = IntVar()
-            input_entry = param.typeEnter(frame_down_level, variable=var, onvalue=1, offvalue=0)
+            input_entry = Checkbutton(frame_down_level, background=setting.BG_COLOR, variable=var, onvalue=1, offvalue=0)
 
-        hint = tkinter.Button(frame_down_level, text="?",
+        hint = ttk.Button(frame_down_level, text="?", style="TButton", width=3,
                               command=lambda: OptionsHintDialog(param, main_frame).init())
         hint.pack(side=RIGHT, padx=(0, 16))
         input_entry.pack(side=RIGHT, padx=8)

@@ -29,18 +29,18 @@ class Option(tk.Frame):
         self.destroy()
 
     def init(self):
-        self.pack(padx=16)
-        flag = tk.Entry(self, textvariable=self.__option_state.flag)
+        self.pack(padx=16, pady=4)
+        flag = ttk.Entry(self, style="TEntry", textvariable=self.__option_state.flag)
         flag.pack(side=tk.LEFT)
 
-        name = tk.Entry(self, textvariable=self.__option_state.name)
+        name = ttk.Entry(self, style="TEntry", textvariable=self.__option_state.name)
         name.pack(side=tk.LEFT, padx=8)
 
-        desc = tk.Entry(self, textvariable=self.__option_state.desc)
+        desc = ttk.Entry(self, style="TEntry", textvariable=self.__option_state.desc)
         desc.pack(side=tk.LEFT)
 
         option_type = ttk.Combobox(self, textvariable=self.__option_state.type, values=Types.list())
         option_type.pack(side=tk.LEFT, padx=8)
 
-        button = tk.Button(self, text="Удалить", command=self.__on_destroy)
+        button = ttk.Button(self, text="Удалить", style="TButton", command=self.__on_destroy)
         button.pack()

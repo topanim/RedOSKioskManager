@@ -1,9 +1,8 @@
 import tkinter as tk
 from dataclasses import asdict
-
 from json import loads, dumps
+from tkinter import ttk
 
-from window.custom_options.components.OptionsHintDialog import OptionsHintDialog
 from window.custom_options.components.OptionComponent import Option
 from window.custom_options.models.OptionDataState import OptionDataState, OptionData
 
@@ -61,10 +60,10 @@ class OptionsScreen(tk.Frame):
     def init(self):
         self.pack()
 
-        add_option = tk.Button(self, text="Добавить свойство", command=self.add_option)
+        add_option = ttk.Button(self, text="Добавить свойство", style="TButton", command=self.add_option)
         add_option.pack(pady=(0, 16))
 
-        save = tk.Button(self, text="Сохранить", command=self.save_options)
+        save = ttk.Button(self, text="Сохранить", style="TButton", command=self.save_options)
 
         # TODO: DEBUG Option
         # button2 = tk.Button(self, text="print options", command=lambda: print(self.get_options()))
