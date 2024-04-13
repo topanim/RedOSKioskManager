@@ -40,4 +40,4 @@ class Option(tk.Frame):
         option_type.pack(side=tk.LEFT)
 
         button = tk.Button(self, text="Удалить", command=self.__on_destroy)
-        button.pack(pady=(8, 0))
+        button.pack()
