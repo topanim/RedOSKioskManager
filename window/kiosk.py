@@ -5,9 +5,11 @@ import subprocess
 import tkinter
 from tkinter import *
 from tkinter import ttk
-import obj
 
-debug_windows = True
+import obj
+import tkinter.filedialog
+
+import setting
 
 
 class Window:
@@ -25,19 +27,25 @@ class Window:
         self.notebook = main_note
 
     def create_kiosk(self) -> tkinter.Frame:
-        frame = ttk.Frame(self.notebook)
+        frame = tkinter.Frame(self.notebook)
+        frame.config(bg='white')
         frame.pack(fill=BOTH, expand=True)
 
-        app_frame = ttk.Frame(frame)
+        app_frame = tkinter.Frame(frame)
+        app_frame.config(bg='white')
 
         Label(app_frame, text='Приложения').pack(side=LEFT, padx=16)
 
-        frame_with_btn = ttk.Frame(app_frame)
+        frame_with_btn = tkinter.Frame(app_frame)
+        frame_with_btn.config(bg='white')
+
         self.app_name = ttk.Combobox(frame_with_btn, state="readonly", width=25)
         self.app_name.pack(side=RIGHT, padx=5)
 
 
-        frame_with_btn2 = ttk.Frame(app_frame)
+        frame_with_btn2 = tkinter.Frame(app_frame)
+        frame_with_btn2.config(bg='white')
+
         Button(frame_with_btn2, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT)
 
         user_frame = ttk.Frame(frame)
@@ -84,7 +92,7 @@ class Window:
 
     def create_app_name(self, app_name_obj: Listbox):
 
-        if debug_windows:
+        if setting.DEBUG:
             progs_list = ['1', 'sadfasdf', 'xcbzxzcb']
         else:
             progs = subprocess.check_output(['less', '/usr/share/applications']).decode('utf-8').split(" ")
@@ -104,7 +112,7 @@ class Window:
         combobox.set(", ".join(selected_values))
 
     def get_users(self):
-        if debug_windows:
+        if setting.DEBUG:
             proc_lists = ['sdfg', 'df123123']
         else:
             proc = subprocess.check_output(["less", "/etc/passwd"]).decode('utf-8').split('\n')
@@ -143,12 +151,12 @@ class Window:
         return frame
 
     def create_import_params(self):
-        windows = Toplevel(self.root)
-        windows.geometry("250x125")
-        is_create_user = self.make_frame('Создавать пользователя?', Checkbutton, windows)
-        is_use_keys = self.make_frame('Использовать ключи?', Checkbutton, windows)
-        btn_create = Button(windows, text="Создать")
-        btn_create.pack(pady=16)
+        def save_file():
+            file = tkinter.filedialog.asksaveasfile(initialfile='kiosk-mode-on.sh',
+                          defaultextension=".sh", filetypes=[("All Files", "*.*"), ("Text Documents", "*.sh")])
+
+            file.write("\n".join(create_config()))
+            file.close()  # `()` was missing.
 
         def create_config():
             cmd_parm = []
@@ -171,3 +179,13 @@ class Window:
                     if i.typeEnter != Checkbutton and (str(i.values.get()) != "0" and len(str(i.values.get())) != 0):
                         cmd_parm.append(f"{i.prefix} {i.values.get()}")
             sh_cmd.append(f"sudo kiosk-mode-on {' '.join(cmd_parm)}")
+            return sh_cmd
+
+
+        windows = Toplevel(self.root)
+        windows.geometry("250x125")
+        is_create_user = self.make_frame('Создавать пользователя?', Checkbutton, windows)
+        is_use_keys = self.make_frame('Использовать ключи?', Checkbutton, windows)
+        btn_create = Button(windows, text="Создать", command=save_file)
+        btn_create.pack(pady=16)
+

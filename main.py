@@ -1,9 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 
+import setting
 import window.custom_options.components.CustomOptionsView
 import window.kiosk
-
 
 class App:
     def __init__(self):
