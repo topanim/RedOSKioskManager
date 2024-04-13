@@ -9,6 +9,7 @@ import window.kiosk
 import window.custom_options.components.CustomOptionsView
 import obj
 
+
 class App:
     def __init__(self):
         root = Tk()
@@ -17,7 +18,6 @@ class App:
         self.root = root
         self.notebook = ttk.Notebook()
         self.notebook.pack(expand=True, fill=BOTH)
-
 
     def make_window(self, win_name: str, frame: Frame) -> ttk.Frame:
         self.notebook.add(frame, text=win_name)
