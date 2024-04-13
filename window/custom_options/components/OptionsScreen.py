@@ -61,14 +61,8 @@ class OptionsScreen(tk.Frame):
     def init(self):
         self.pack()
 
-        title_box = tk.Frame(self)
-        title_box.pack()
-
-        add_option = tk.Button(title_box, text="Добавить свойство", command=self.add_option)
-        add_option.pack(side=tk.LEFT, padx=8)
-
-        hint = tk.Button(title_box, text="?", command=lambda: OptionsHintDialog(self).init())
-        hint.pack(side=tk.LEFT)
+        add_option = tk.Button(self, text="Добавить свойство", command=self.add_option)
+        add_option.pack()
 
         save = tk.Button(self, text="Сохранить", command=self.save_options)
 

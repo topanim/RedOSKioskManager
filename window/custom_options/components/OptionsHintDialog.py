@@ -1,20 +1,25 @@
 import tkinter as tk
 
+from obj import ParamsCommand
 from res.strings import options_hint
 
 
 class OptionsHintDialog(tk.Toplevel):
     def __init__(
             self,
+            option: ParamsCommand,
             master=None
     ):
+        self.param = option
         super().__init__(master, pady=8, padx=8)
 
     def init(self):
-        label_title = tk.Label(self, text="Подсказка")
+        self.title("Подсказка")
+
+        label_title = tk.Label(self, text=self.param.name.capitalize())
         label_title.pack()
 
-        label_description = tk.Label(self, text=options_hint, wraplength=300, justify="left")
+        label_description = tk.Label(self, text=self.param.desc, wraplength=300, justify="left")
         label_description.pack()
 
         ok_button = tk.Button(self, text="OK", command=self.destroy)

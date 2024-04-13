@@ -33,8 +33,11 @@ class Option(tk.Frame):
         flag = tk.Entry(self, textvariable=self.__option_state.flag)
         flag.pack(side=tk.LEFT)
 
-        key = tk.Entry(self, textvariable=self.__option_state.desc)
-        key.pack(side=tk.LEFT)
+        name = tk.Entry(self, textvariable=self.__option_state.name)
+        name.pack(side=tk.LEFT)
+
+        desc = tk.Entry(self, textvariable=self.__option_state.desc)
+        desc.pack(side=tk.LEFT)
 
         option_type = ttk.Combobox(self, textvariable=self.__option_state.type, values=Types.list())
         option_type.pack(side=tk.LEFT)
