@@ -1,10 +1,10 @@
-import dataclasses
+from dataclasses import dataclass
 from tkinter import *
 
-@dataclasses.dataclass
+
+@dataclass
 class ParamsCommand:
     prefix: str
     name: str
     typeEnter: Checkbutton or Entry
     values: str or bool or int = None
-
