@@ -1,18 +1,14 @@
-import dataclasses
-import os
-import subprocess
-import tkinter
 from tkinter import *
 from tkinter import ttk
 
 import window.kiosk
-import obj
 
 class App:
     def __init__(self):
         root = Tk()
         root.title("Эксперт киоска")
-        root.geometry("500x300")
+        root.geometry("500x350")
+        root.resizable(False, False)
         self.root = root
         self.notebook = ttk.Notebook()
         self.notebook.pack(expand=True, fill=BOTH)
