@@ -62,7 +62,7 @@ class OptionsScreen(tk.Frame):
         self.pack()
 
         add_option = tk.Button(self, text="Добавить свойство", command=self.add_option)
-        add_option.pack()
+        add_option.pack(pady=(0, 16))
 
         save = tk.Button(self, text="Сохранить", command=self.save_options)
 

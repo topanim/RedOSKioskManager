@@ -34,13 +34,13 @@ class Option(tk.Frame):
         flag.pack(side=tk.LEFT)
 
         name = tk.Entry(self, textvariable=self.__option_state.name)
-        name.pack(side=tk.LEFT)
+        name.pack(side=tk.LEFT, padx=8)
 
         desc = tk.Entry(self, textvariable=self.__option_state.desc)
         desc.pack(side=tk.LEFT)
 
         option_type = ttk.Combobox(self, textvariable=self.__option_state.type, values=Types.list())
-        option_type.pack(side=tk.LEFT)
+        option_type.pack(side=tk.LEFT, padx=8)
 
         button = tk.Button(self, text="Удалить", command=self.__on_destroy)
         button.pack()

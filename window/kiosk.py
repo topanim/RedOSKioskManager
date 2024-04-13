@@ -1,15 +1,14 @@
-import dataclasses
 import json
 import os
 import subprocess
 import tkinter
 from tkinter import *
 from tkinter import ttk
+
 import obj
+import setting
 from window.custom_options.components.OptionsHintDialog import OptionsHintDialog
 from window.custom_options.models.OptionDataState import OptionData
-
-import setting
 
 
 class Window:
@@ -49,22 +48,23 @@ class Window:
         frame_with_btn = tkinter.Frame(app_frame)
         frame_with_btn.config(bg=setting.BG_COLOR)
 
-        self.app_name = ttk.Combobox(frame_with_btn, state="readonly", width=25)
-        self.app_name.pack(side=RIGHT, padx=5)
+        self.app_name = ttk.Combobox(frame_with_btn, state="readonly", width=24)
+        self.app_name.pack(side=RIGHT, padx=16)
 
 
         frame_with_btn2 = tkinter.Frame(app_frame)
         frame_with_btn2.config(bg=setting.BG_COLOR)
 
-        Button(frame_with_btn2, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT)
+        Button(frame_with_btn2, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT,
+                                                                                                            padx=8)
 
         user_frame = tkinter.Frame(frame)
         user_frame.config(bg=setting.BG_COLOR)
 
         Label(user_frame, text='Пользователь').pack(side=LEFT, padx=16)
 
-        self.username = ttk.Combobox(user_frame, values=self.get_users(), width=22)
-        self.username.pack(side=RIGHT, padx=5)
+        self.username = ttk.Combobox(user_frame, values=self.get_users(), width=24)
+        self.username.pack(side=RIGHT, padx=16, pady=(8, 16))
 
         app_frame.pack(fill=BOTH, pady=(16, 4))
         frame_with_btn.pack(fill=BOTH)
@@ -94,9 +94,9 @@ class Window:
 
         hint = tkinter.Button(frame_down_level, text="?",
                               command=lambda: OptionsHintDialog(param, main_frame).init())
-        hint.pack(side=RIGHT)
+        hint.pack(side=RIGHT, padx=(0, 16))
         input_entry.pack(side=RIGHT, padx=8)
-        frame_down_level.pack(fill=BOTH)
+        frame_down_level.pack(fill=BOTH, pady=(0, 8))
         return var
 
     def window_select_app(self, combobox: ttk.Combobox):
