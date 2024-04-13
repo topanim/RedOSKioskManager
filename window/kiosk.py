@@ -86,7 +86,7 @@ class Window:
         frame_down_level.config(bg=setting.BG_COLOR)
 
         Label(frame_down_level, text=param.name).pack(side=LEFT, padx=16)
-        input_entry = param.typeEnter(frame_down_level, width=23, highlightthickness=1, highlightcolor='black', highlightbackground='black')
+        input_entry = param.typeEnter(frame_down_level, width=23, )
         var = input_entry
         if param.typeEnter == Checkbutton:
             var = IntVar()

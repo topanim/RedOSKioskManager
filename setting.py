@@ -1,2 +1,2 @@
 DEBUG = True
-BG_COLOR = 'white'
+BG_COLOR = '#f0f0f0'
