@@ -23,7 +23,7 @@ class Window:
 
         app_frame = ttk.Frame(frame)
 
-        Label(app_frame, text='Приложения').pack(side=LEFT)
+        Label(app_frame, text='Приложения').pack(side=LEFT, padx=16)
 
         frame_with_btn = ttk.Frame(app_frame)
 
@@ -33,7 +33,7 @@ class Window:
         Button(frame_with_btn, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT)
 
         user_frame = ttk.Frame(frame)
-        Label(user_frame, text='Пользователь').pack(side=LEFT)
+        Label(user_frame, text='Пользователь').pack(side=LEFT, padx=16)
 
         self.username = ttk.Combobox(user_frame, values=self.get_users(), width=22)
         self.username.pack(side=RIGHT, padx=5)
@@ -46,26 +46,27 @@ class Window:
             var = self.make_frame(i.name, i.typeEnter, frame)
             i.values = var
 
-        Button(frame, text='Содзать киоск', command=self.command_kiosk_on).pack()
-        Button(frame, text='Отключить киоск', command=self.command_kiosk_off).pack()
-        Button(frame, text='Создать файл конфигурирования', command=self.create_import_params).pack()
+        Button(frame, text='Содзать киоск', command=self.command_kiosk_on).pack(pady=(16, 3))
+        Button(frame, text='Отключить киоск', command=self.command_kiosk_off).pack(pady=3)
+        Button(frame, text='Создать файл конфигурирования', command=self.create_import_params).pack(pady=3)
 
         return frame
 
     def make_frame(self, label_text: str, entry_type, main_frame: Frame):
         frame_down_level = ttk.Frame(main_frame, width=5)
-        Label(frame_down_level, text=label_text).pack(side=LEFT)
-        input_entry = entry_type(frame_down_level, width=25)
+        Label(frame_down_level, text=label_text).pack(side=LEFT, padx=16)
+        input_entry = entry_type(frame_down_level, width=23)
         var = input_entry
         if entry_type == Checkbutton:
             var = IntVar()
             input_entry = entry_type(frame_down_level, variable=var, onvalue=1, offvalue=0)
-        input_entry.pack(side=RIGHT, padx=5)
+        input_entry.pack(side=RIGHT, padx=8)
         frame_down_level.pack(fill=BOTH)
         return var
 
     def window_select_app(self, combobox: ttk.Combobox):
         windows = Toplevel(self.root)
+
         app_name = Listbox(windows, selectmode="multiple", exportselection=0)
         self.create_app_name(app_name)
         app_name.pack()
@@ -134,10 +135,11 @@ class Window:
 
     def create_import_params(self):
         windows = Toplevel(self.root)
+        windows.geometry("250x125")
         is_create_user = self.make_frame('Создавать пользователя?', Checkbutton, windows)
         is_use_keys = self.make_frame('Использовать ключи?', Checkbutton, windows)
         btn_create = Button(windows, text="Создать")
-        btn_create.pack()
+        btn_create.pack(pady=16)
 
         def create_config():
             cmd_parm = []
