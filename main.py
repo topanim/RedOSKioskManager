@@ -13,7 +13,8 @@ class App:
     def __init__(self):
         root = Tk()
         root.title("Эксперт киоска")
-        root.geometry("500x300")
+        root.geometry("350x310")
+        root.resizable(False, False)
         self.root = root
         self.notebook = ttk.Notebook()
         self.notebook.pack(expand=True, fill=BOTH)
