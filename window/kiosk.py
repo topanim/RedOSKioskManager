@@ -17,7 +17,7 @@ class Window:
 
         self.command_params = []
 
-        with open('window/custom_options/config/config.json') as f:
+        with open('window/custom_options/config/config.json', 'r') as f:
             params = json.loads(f.read())
             for param in params:
                 option = OptionData(**param)
@@ -33,29 +33,34 @@ class Window:
         self.root = root
         self.notebook = main_note
 
+
+
     def create_kiosk(self) -> tkinter.Frame:
+
         frame = tkinter.Frame(self.notebook)
-        frame.config(bg='white')
+        frame.config(bg=setting.BG_COLOR)
         frame.pack(fill=BOTH, expand=True)
 
         app_frame = tkinter.Frame(frame)
-        app_frame.config(bg='white')
+        app_frame.config(bg=setting.BG_COLOR)
 
         Label(app_frame, text='Приложения').pack(side=LEFT, padx=16)
 
         frame_with_btn = tkinter.Frame(app_frame)
-        frame_with_btn.config(bg='white')
+        frame_with_btn.config(bg=setting.BG_COLOR)
 
         self.app_name = ttk.Combobox(frame_with_btn, state="readonly", width=25)
         self.app_name.pack(side=RIGHT, padx=5)
 
 
         frame_with_btn2 = tkinter.Frame(app_frame)
-        frame_with_btn2.config(bg='white')
+        frame_with_btn2.config(bg=setting.BG_COLOR)
 
         Button(frame_with_btn2, text='Выбрать', command=lambda: self.window_select_app(self.app_name)).pack(side=RIGHT)
 
-        user_frame = ttk.Frame(frame)
+        user_frame = tkinter.Frame(frame)
+        user_frame.config(bg=setting.BG_COLOR)
+
         Label(user_frame, text='Пользователь').pack(side=LEFT, padx=16)
 
         self.username = ttk.Combobox(user_frame, values=self.get_users(), width=22)
@@ -77,9 +82,11 @@ class Window:
         return frame
 
     def make_frame(self, param: obj.ParamsCommand, main_frame: Frame):
-        frame_down_level = ttk.Frame(main_frame, width=5)
+        frame_down_level = tkinter.Frame(main_frame, width=5)
+        frame_down_level.config(bg=setting.BG_COLOR)
+
         Label(frame_down_level, text=param.name).pack(side=LEFT, padx=16)
-        input_entry = param.typeEnter(frame_down_level, width=23)
+        input_entry = param.typeEnter(frame_down_level, width=23, highlightthickness=1, highlightcolor='black', highlightbackground='black')
         var = input_entry
         if param.typeEnter == Checkbutton:
             var = IntVar()

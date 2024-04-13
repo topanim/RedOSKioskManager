@@ -14,14 +14,14 @@ class OptionsScreen(tk.Frame):
         self.options = []
 
     def get_options(self):
-        return [option.get() for option in self.options if option.get().is_valid()]
+        return list(map(lambda x: x.get(), self.options))
 
     def on_option_delete(self, option):
         self.options.remove(option)
 
     def save_options(self):
         with open('window/custom_options/config/config.json', 'w') as f:
-            f.write(dumps([asdict(obj) for obj in self.get_options()]))
+            f.write(dumps([asdict(obj) for obj in self.get_options()], ensure_ascii=False))
 
     def load_options(self):
         with open('window/custom_options/config/config.json', 'r') as f:

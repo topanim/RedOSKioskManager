@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 
 import setting
-import window.custom_options.components.CustomOptionsView
+import window.custom_options.components.OptionsScreen
 import window.kiosk
 
 
@@ -15,6 +15,10 @@ class App:
         self.root = root
         self.notebook = ttk.Notebook()
         self.notebook.pack(expand=True, fill=BOTH)
+
+        self.root.event_add('<<Paste>>', '<Control-igrave>')
+        self.root.event_add("<<Copy>>", "<Control-ntilde>")
+
 
     def make_window(self, win_name: str, frame: Frame) -> ttk.Frame:
         self.notebook.add(frame, text=win_name)
