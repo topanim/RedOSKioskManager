@@ -143,7 +143,7 @@ class Window:
             cmd_parm = []
             sh_cmd = []
             if is_create_user.get() == 1:
-                sh_cmd.append(f"useradd {self.username.get()}")
+                sh_cmd.append(f"sudo useradd {self.username.get()}")
 
             if len(self.app_name.get()) > 0:
                 cmd = f'-a {self.app_name.get()}'

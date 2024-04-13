@@ -1,7 +1,7 @@
 import tkinter as tk
 from typing import List
 
-from jsons import loads, dumps
+from json import loads, dumps
 
 from window.custom_options.components.Option import Option
 from window.custom_options.models.OptionDataState import OptionDataState, OptionData
@@ -19,11 +19,11 @@ class CustomOptionsView(tk.Frame):
         self.__options.remove(option)
 
     def save_options(self):
-        with open('../config/config.json', 'w') as f:
+        with open('window/custom_options/config/config.json', 'w') as f:
             f.write(dumps(self.get_options()))
 
     def load_options(self):
-        with open('../config/config.json', 'r') as f:
+        with open('window/custom_options/config/config.json', 'r') as f:
             try:
                 options = loads(f.read(), List[OptionData])
             except:
@@ -63,7 +63,8 @@ class CustomOptionsView(tk.Frame):
         add_option.pack()
 
         save = tk.Button(self, text="save", command=self.save_options)
-        save.pack(side=tk.BOTTOM)
+        return self
+
 
         # TODO: DEBUG Option
         # button2 = tk.Button(self, text="print options", command=lambda: print(self.get_options()))
@@ -74,6 +75,8 @@ class CustomOptionsView(tk.Frame):
         # button3.pack()
 
         self.load_options()
+        save.pack(side=tk.BOTTOM)
+
 
     def add_option(self, ods: OptionDataState = None):
         option = Option(self, self.on_option_delete, ods)

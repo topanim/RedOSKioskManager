@@ -6,6 +6,7 @@ from tkinter import *
 from tkinter import ttk
 
 import window.kiosk
+import window.custom_options.components.CustomOptionsView
 import obj
 
 class App:
@@ -24,6 +25,7 @@ class App:
 
     def start(self):
         self.make_window('Киоск', window.kiosk.Window(self.root, self.notebook).create_kiosk())
+        self.make_window('Конфигурирование', window.custom_options.components.CustomOptionsView.CustomOptionsView().init())
 
         self.root.mainloop()
 
