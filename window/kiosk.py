@@ -9,7 +9,7 @@ import obj
 import setting
 from window.custom_options.components.OptionsHintDialog import OptionsHintDialog
 from window.custom_options.models.OptionDataState import OptionData
-
+import tkinter.filedialog
 
 class Window:
     def __init__(self, root, main_note: ttk.Notebook):
