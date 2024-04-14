@@ -206,9 +206,12 @@ class Window:
 
 
         windows = Toplevel(self.root)
-        windows.geometry("250x125")
-        is_create_user = self.make_frame('Создавать пользователя?', Checkbutton, windows)
-        is_use_keys = self.make_frame('Использовать ключи?', Checkbutton, windows)
+        windows.geometry("300x140")
+
+        create_user = obj.ParamsCommand('', 'Создавать пользователя?', 'Создает нового пользователя в системе. Имя нового пользователя указывается в `Пользователь`', Checkbutton)
+        use_keys = obj.ParamsCommand('', 'Импортирова ключи?', 'Импортирует ключи команды при создании sh файла', Checkbutton)
+        is_create_user = self.make_frame(create_user, windows)
+        is_use_keys = self.make_frame(use_keys, windows)
         btn_create = Button(windows, text="Создать", command=save_file)
         btn_create.pack(pady=16)
 

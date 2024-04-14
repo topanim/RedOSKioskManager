@@ -14,12 +14,16 @@ class WhiteListScreen(ttk.Frame):
 
     def save_domains(self):
         # TODO: replace .. to window/whitelist
-        with open('../config/whitelist.json', 'w', encoding='utf-8') as f:
+        with open('window/whitelist/config/whitelist.json', 'w', encoding='utf-8') as f:
             f.write(dumps(self.table.get_domains(), ensure_ascii=False))
+
+    def insert_white_list(self):
+        for i in self.table.get_domains():
+            pass
 
     @staticmethod
     def get_saved():
-        with open('../config/whitelist.json', 'r', encoding='utf-8') as f:
+        with open('window/whitelist/config/whitelist.json', 'r', encoding='utf-8') as f:
             try:
                 domains = [str(obj) for obj in loads(f.read())]
             except:
@@ -47,7 +51,7 @@ class WhiteListScreen(ttk.Frame):
         self.table.init()
         self.load_domains()
 
-        input_row = tk.Frame()
+        input_row = tk.Frame(self)
         input_row.pack()
 
         domain_entry = ttk.Entry(input_row, style="TEntry", textvariable=self.domain_var)
@@ -57,8 +61,17 @@ class WhiteListScreen(ttk.Frame):
         write_entry = ttk.Button(input_row, text=">", command=self.confirm)
         write_entry.pack(side=tk.LEFT)
 
-        save = ttk.Button(self, text="save", command=self.save_domains)
-        save.pack()
+
+        btn_frame = tk.Frame(self)
+
+        save = ttk.Button(btn_frame, text="Сохранить", command=self.save_domains)
+        save.pack(side=tk.LEFT)
+
+        btn_accept_ban = ttk.Button(btn_frame, text="Выполнить", command=self.insert_white_list)
+        btn_accept_ban.pack(side=tk.RIGHT)
+
+        btn_frame.pack()
+        return self
 
 
 # root = tk.Tk()

@@ -26,6 +26,7 @@ class App:
     def start(self):
         self.make_window('Киоск', window.kiosk.Window(self.root, self.notebook).create_kiosk())
         self.make_window('Конфигурирование', window.custom_options.components.OptionsScreen.OptionsScreen().init())
+        self.make_window('Белый лист', window.whitelist.components.WhiteListScreen.WhiteListScreen().init())
 
         self.root.mainloop()
 
